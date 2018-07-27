@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/Server.cpp
+iostream
+-
+Server.h
+/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/Server.h
+
+/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/Server.h
+boost/asio.hpp
+-
+boost/thread.hpp
+-
+boost/lockfree/queue.hpp
+-
+unordered_map
+-
+
+/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/main.cpp
+iostream
+-
+Server.h
+/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/Server.h
+

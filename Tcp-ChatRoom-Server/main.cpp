@@ -1,6 +1,8 @@
 #include <iostream>
+#include "Server.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Server *server = new Server(3002);
+    server->Listen();
     return 0;
 }

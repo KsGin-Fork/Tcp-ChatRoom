@@ -23,7 +23,7 @@ private:
     /**
      * 待发送消息队列 ，所有 socket 线程向里边写 ，发送线程读
     */
-    boost::lockfree::queue<std::pair<boost::asio::const_buffer, boost::asio::ip::tcp::socket>> msg_queue;
+    boost::lockfree::queue<std::pair<boost::asio::const_buffer, socket_ptr> ,boost::lockfree::fixed_sized<false>> msg_queue;
     /**
      * 在线用户对照表
      */
@@ -50,12 +50,12 @@ private:
     /**
      * 发送线程
     */
-    static void write_handler();
+    void write_handler();
 
     /**
      * 接收线程
      */
-    static void read_handler(socket_ptr socket);
+    void read_handler(socket_ptr socket);
 
 public:
 
