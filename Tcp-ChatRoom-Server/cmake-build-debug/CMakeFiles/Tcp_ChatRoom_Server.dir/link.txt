@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/Tcp_ChatRoom_Server.dir/main.cpp.o  -o Tcp_ChatRoom_Server 
+/usr/bin/c++   -std=c++17 -pthread -g   CMakeFiles/Tcp_ChatRoom_Server.dir/main.cpp.o CMakeFiles/Tcp_ChatRoom_Server.dir/Server.cpp.o  -o Tcp_ChatRoom_Server -lboost_system -lboost_thread -lboost_regex 

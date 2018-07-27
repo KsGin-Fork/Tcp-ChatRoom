@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(Tcp_ChatRoom_Server)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -pthread")
 
-add_executable(Tcp_ChatRoom_Server main.cpp)
+link_libraries(boost_system boost_thread boost_regex)
+add_executable(Tcp_ChatRoom_Server main.cpp Server.cpp Server.h)

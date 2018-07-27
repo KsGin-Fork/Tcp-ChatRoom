@@ -84,6 +84,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/Server.cpp">
+			<Option target="Tcp_ChatRoom_Server"/>
+		</Unit>
+		<Unit filename="/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/Server.h">
+			<Option target="Tcp_ChatRoom_Server"/>
+		</Unit>
 		<Unit filename="/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/main.cpp">
 			<Option target="Tcp_ChatRoom_Server"/>
 		</Unit>
