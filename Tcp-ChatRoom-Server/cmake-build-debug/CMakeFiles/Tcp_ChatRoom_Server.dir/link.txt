@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Tcp_ChatRoom_Server.dir/main.cpp.o  -o Tcp_ChatRoom_Server 
