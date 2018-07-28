@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/Server.cpp" "/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/cmake-build-debug/CMakeFiles/Tcp_ChatRoom_Server.dir/Server.cpp.o"
-  "/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/main.cpp" "/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/cmake-build-debug/CMakeFiles/Tcp_ChatRoom_Server.dir/main.cpp.o"
+  "/Users/KsGin/Documents/xiaomi-work/Tcp-ChatRoom/Tcp-ChatRoom-Server/Server.cpp" "/Users/KsGin/Documents/xiaomi-work/Tcp-ChatRoom/Tcp-ChatRoom-Server/cmake-build-debug/CMakeFiles/Tcp_ChatRoom_Server.dir/Server.cpp.o"
+  "/Users/KsGin/Documents/xiaomi-work/Tcp-ChatRoom/Tcp-ChatRoom-Server/main.cpp" "/Users/KsGin/Documents/xiaomi-work/Tcp-ChatRoom/Tcp-ChatRoom-Server/cmake-build-debug/CMakeFiles/Tcp_ChatRoom_Server.dir/main.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "GNU")
+set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
