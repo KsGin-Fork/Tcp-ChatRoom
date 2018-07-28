@@ -22,7 +22,7 @@ private:
     /**
      * 待发送消息队列 ，所有 socket 线程向里边写 ，发送线程读
     */
-    boost::lockfree::queue<std::pair<boost::asio::const_buffer, socket_ptr>> *msg_queue;
+    boost::lockfree::queue<std::pair<boost::asio::const_buffer, socket_ptr>*> *msg_queue;
     /**
      * 在线用户对照表
      */
