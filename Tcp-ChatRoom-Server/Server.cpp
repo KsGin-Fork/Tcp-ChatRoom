@@ -13,24 +13,24 @@ using namespace std;
 Server::Server(const int &port) {
     this->port = port;
     ep = ip::tcp::endpoint(ip::tcp::v4(), this->port);
-    msg_queue = new lockfree::queue<pair<const_buffer, socket_ptr> *>(256);
-    user_map = new unordered_map<string, ip::tcp::socket>();
+    msg_queue = new lockfree::queue<std::pair<const_buffer, socket_ptr> *>(256);
+    user_map = new unordered_map<string, socket_ptr>();
 }
 
 Server::Server() {
     ep = ip::tcp::endpoint(ip::tcp::v4(), 5555);
     msg_queue = new lockfree::queue<pair<const_buffer, socket_ptr> *>(256);
-    user_map = new unordered_map<string, ip::tcp::socket>();
+    user_map = new unordered_map<string, socket_ptr>();
 }
 
 void Server::Listen() {
-    boost::thread write_thread(bind(&Server::write_handler, this));
+    boost::thread(bind(&Server::write_handler, this));
     std::cout << "开始监听 3002 端口..." << std::endl;
     while (true) {
         socket_ptr sock(new ip::tcp::socket(service));
         ip::tcp::acceptor acc(service, ep);
         acc.accept(*sock);
-        boost::thread read_thread(bind(&Server::read_handler, this, sock));
+        boost::thread(bind(&Server::read_handler, this, sock));
     }
 }
 
@@ -46,17 +46,31 @@ void Server::shutdown() {
 }
 
 void Server::read_handler(socket_ptr sock) {
+    bool isLoginSuccessful = false;
     auto remote_address = sock->remote_endpoint().address();
     auto remote_port = sock->remote_endpoint().port();
-    std::cout << remote_address << "/" << remote_port << "已连接"<< std::endl;
-    write(*sock, buffer("Ready"), ecode);
+    msg_queue->push(new pair<const_buffer, socket_ptr>(buffer("已连接聊天室...请输入你的昵称："), sock));
     while (true) {
-        char data[512];
+        string msg = "";
+        string data;
         size_t len = sock->read_some(buffer(data), ecode);
         if (len > 0) {
             std::cout << remote_address << "/" << remote_port << ": " << data << std::endl;
-            auto sm = new pair<const_buffer, socket_ptr>(buffer(data), sock);
-            msg_queue->push(sm);
+            if (isLoginSuccessful) {
+                msg = msg + string("对你说：") + string(data);
+                msg_queue->push(new pair<const_buffer, socket_ptr>(buffer(msg), sock));
+            } else {
+                if (user_map->find(string(data)) != user_map->end()) {
+                    msg_queue->push(new pair<const_buffer, socket_ptr>(buffer("昵称已存在，请重新输入："), sock));
+                } else {
+                    msg = string(data);
+                    user_map->insert(make_pair(msg, sock));
+                    msg_queue->push(new pair<const_buffer, socket_ptr>(buffer("登录成功"), sock));
+                    isLoginSuccessful = true;
+                }
+
+            }
+
         }
     }
 }
