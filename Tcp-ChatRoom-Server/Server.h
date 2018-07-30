@@ -21,7 +21,8 @@ private:
 
     enum MSG_TYPE {
         GET_ALL_USER = 0,
-        SEND_MESSAGE
+        SEND_MESSAGE ,
+        PING
     };
 
     /**
@@ -61,7 +62,10 @@ private:
      */
     void read_handler(socket_ptr socket);
 
-    void msg_handler(socket_ptr& socket , const std::string& msg, const std::string &user);
+    /**
+     * 消息处理
+     */
+    void msg_handler(socket_ptr& sock , const std::string& msg, const std::string &user);
 
 public:
 

@@ -55,13 +55,26 @@ void Server::read_handler(socket_ptr sock) {
     msg_queue->push(new pair<const_buffer, socket_ptr>(buffer("已连接聊天室...请输入你的昵称："), sock));
     char data[512];
     string user;
+    bool check_ping = true;
+    posix_time::ptime last_ping;
     while (true) {
+        if (isLoginSuccessful && !check_ping) {
+            sock.get()->close();
+            user_map->erase(user);
+        }
         memset(data , 0 , 512);
         size_t len = sock->read_some(buffer(data), ecode);
         if (len > 0) {
             std::cout << remote_address << "/" << remote_port << ": " << data << std::endl;
             if (isLoginSuccessful) {
-                msg_handler(sock , string(data) , user);
+                string client_msg(data);
+                if (client_msg.size() == 1 && client_msg[0] - '0' == PING) {
+                    last_ping = posix_time::microsec_clock::local_time();
+                } else if((posix_time::microsec_clock::local_time() - last_ping).total_milliseconds() < 10000){
+                    msg_handler(sock , client_msg , user);
+                } else {
+                    check_ping = false;
+                }
             } else {
                 if (user_map->find(string(data)) != user_map->end()) {
                     msg_queue->push(new pair<const_buffer, socket_ptr>(buffer("昵称已存在，请重新输入："), sock));
@@ -71,6 +84,7 @@ void Server::read_handler(socket_ptr sock) {
                     string respond = "登录成功\n 欢迎来到本聊天室,聊天室规则如下：\n\t 输入 0 获取所有用户在线状态 \n\t 输入 1 用户名 信息 给对应用户发送信息";
                     msg_queue->push(new pair<const_buffer, socket_ptr>(buffer(respond), sock));
                     isLoginSuccessful = true;
+                    last_ping = posix_time::microsec_clock::local_time();
                 }
 
             }
@@ -84,7 +98,7 @@ void Server::write_handler() {
         if (!msg_queue->empty()) {
             auto sm = new pair<const_buffer, socket_ptr>(buffer(""), nullptr);
             msg_queue->pop(sm);
-            sm->second.get()->send(sm->first);
+            sm->second.get()->write_some(sm->first);
             delete sm;
             sm = nullptr;
         }
@@ -94,21 +108,22 @@ void Server::write_handler() {
 void Server::msg_handler(socket_ptr &sock, const string &msg , const std::string &user_name) {
     vector<string> strs;
     split(strs , msg , is_any_of(" ") , token_compress_on);
-    stringstream respond;
     if (strs.size() == 1 && strs[0][0] - '0' == GET_ALL_USER) {
+        stringstream respond;
         respond << "\n当前在线用户：\n";
         for (auto &user : *user_map) {
             respond << "\t" + user.first << " " <<
                     user.second.get()->remote_endpoint().address().to_string() + ":" <<
                     user.second.get()->remote_endpoint().port() << "\n";
         }
-        msg_queue->push(new pair<const_buffer, socket_ptr>(buffer(respond.str()), sock));
+        char data[512];
+        sprintf(data , "%s" , respond.str().c_str());
+        msg_queue->push(new pair<const_buffer, socket_ptr>(buffer(data), sock));
     } else if (strs.size() == 3 && strs[0][0] - '0' == SEND_MESSAGE) {
         if (user_map->find(strs[1]) != user_map->end()) {
-            string str = user_name;
-            str.append("对你说");
-            str.append(strs[2]);
-            msg_queue->push(new pair<const_buffer, socket_ptr>(buffer(str), (*user_map)[strs[1]]));
+            char data[512] = {};
+            sprintf(data , "%s对你说: %s" , user_name.c_str() , strs[2].c_str());
+            msg_queue->push(new pair<const_buffer, socket_ptr>(buffer(data), (*user_map)[strs[1]]));
             msg_queue->push(new pair<const_buffer, socket_ptr>(buffer("发送成功"), sock));
         } else {
             msg_queue->push(new pair<const_buffer, socket_ptr>(buffer("用户不存在或者已下线"), sock));
