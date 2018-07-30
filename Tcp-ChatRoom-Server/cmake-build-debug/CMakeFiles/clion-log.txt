@@ -1,4 +1,4 @@
-/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/KsGin/Documents/xiaomi-work/Tcp-ChatRoom/Tcp-ChatRoom-Server
+/home/ksgin/Documents/IDES/clion-2018.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/KsGin/Documents/xiaomi-work/Tcp-ChatRoom/Tcp-ChatRoom-Server/cmake-build-debug
+-- Build files have been written to: /home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/cmake-build-debug

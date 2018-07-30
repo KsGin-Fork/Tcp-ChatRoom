@@ -1,3 +1,3 @@
-/Users/KsGin/Documents/xiaomi-work/Tcp-ChatRoom/Tcp-ChatRoom-Server/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/KsGin/Documents/xiaomi-work/Tcp-ChatRoom/Tcp-ChatRoom-Server/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/KsGin/Documents/xiaomi-work/Tcp-ChatRoom/Tcp-ChatRoom-Server/cmake-build-debug/CMakeFiles/Tcp_ChatRoom_Server.dir
+/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ksgin/Documents/WorkSpace/ClionProjects/Tcp-ChatRoom/Tcp-ChatRoom-Server/cmake-build-debug/CMakeFiles/Tcp_ChatRoom_Server.dir

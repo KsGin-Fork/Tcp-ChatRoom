@@ -19,6 +19,11 @@ typedef std::shared_ptr<boost::asio::ip::tcp::socket> socket_ptr;
 class Server {
 private:
 
+    enum MSG_TYPE {
+        GET_ALL_USER = 0,
+        SEND_MESSAGE
+    };
+
     /**
      * 待发送消息队列 ，所有 socket 线程向里边写 ，发送线程读
     */
@@ -55,6 +60,8 @@ private:
      * 接收线程
      */
     void read_handler(socket_ptr socket);
+
+    void msg_handler(socket_ptr& socket , const std::string& msg, const std::string &user);
 
 public:
 
